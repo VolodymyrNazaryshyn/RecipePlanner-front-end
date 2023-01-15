@@ -173,3 +173,138 @@ div.recipe-card div.card-body span.category {
 .modal__content {
   width: 0;
 }
+
+/************* kindmeal & cuisine & diet filters ****************/
+div.filters {
+  text-align: center;
+}
+
+div.filters span {
+  font-weight: bold;
+}
+
+div.filters span.title-kind-meal {
+  color: #06421a;
+}
+
+div.filters span.title-diet {
+  color: #1f084d;
+}
+
+div.filters span.title-cuisine {
+  color: #551818;
+}
+
+input.checkbox-kindmeal,
+input.checkbox-cuisine,
+input.checkbox-diet {
+  display: none;
+}
+
+label.label-kindmeal,
+input.checkbox-kindmeal:checked+label.label-kindmeal:after {
+  background-color: #565c0a;
+}
+
+label.label-kindmeal:before {
+  border-right: 8px solid #565c0a;
+}
+
+label.label-cuisine,
+input.checkbox-cuisine:checked+label.label-cuisine:after {
+  background-color: #CC0000;
+}
+
+label.label-cuisine:before {
+  border-right: 8px solid #CC0000;
+}
+
+label.label-diet,
+input.checkbox-diet:checked+label.label-diet:after {
+  background-color: #003366;
+}
+
+label.label-diet:before {
+  border-right: 8px solid #003366;
+}
+
+label.label-kindmeal,
+label.label-cuisine,
+label.label-diet {
+  border-radius: 0 2px 2px 0;
+  color: #fff;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 13px;
+  margin: 0 0 2px 10px;
+  padding: 4px 7px 3px;
+  position: relative;
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+label.label-kindmeal:before,
+label.label-cuisine:before,
+label.label-diet:before {
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  content: "";
+  height: 0;
+  left: -8px;
+  position: absolute;
+  top: 0;
+  transition: 0.2s linear;
+  width: 0;
+}
+
+label.label-kindmeal:after,
+label.label-cuisine:after,
+label.label-diet:after {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 4px;
+  left: -2px;
+  position: absolute;
+  top: 8px;
+  width: 4px;
+}
+
+label.label-kindmeal:hover,
+input.checkbox-kindmeal:checked+label.label-kindmeal,
+label.label-cuisine:hover,
+input.checkbox-cuisine:checked+label.label-cuisine,
+label.label-diet:hover,
+input.checkbox-diet:checked+label.label-diet {
+  color: #000;
+}
+
+label.label-kindmeal:hover,
+input.checkbox-kindmeal:checked+label.label-kindmeal {
+  background: #d7f767;
+}
+
+label.label-cuisine:hover,
+input.checkbox-cuisine:checked+label.label-cuisine {
+  background: #f18c5d;
+}
+
+label.label-diet:hover,
+input.checkbox-diet:checked+label.label-diet {
+  background: #0099CC;
+}
+
+label.label-kindmeal:hover:before,
+input.checkbox-kindmeal:checked+label.label-kindmeal:before {
+  border-right-color: #d7f767;
+}
+
+label.label-cuisine:hover:before,
+input.checkbox-cuisine:checked+label.label-cuisine:before {
+  border-right-color: #f18c5d;
+}
+
+label.label-diet:hover:before,
+input.checkbox-diet:checked+label.label-diet:before {
+  border-right-color: #0099CC;
+}
