@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import Modal from '../modal/Modal';
+import React, { useState } from 'react'
+import Modal from '../modal/Modal'
+import './styles.css'
 
 const RecipeCard = ({ recipe }) => {
-    const { name, kindOfMeal, image, description } = recipe;
-    const [modalActive, setModalActive] = useState(false);
+    const { name, kindOfMeal, image, ingredients } = recipe
+    const [modalActive, setModalActive] = useState(false)
+
+    let ingredientsArr = []
+    for (let i in ingredients) ingredientsArr.push(i)
 
     return (
         <>
@@ -15,14 +19,28 @@ const RecipeCard = ({ recipe }) => {
                 </div>
             </div>
             <Modal active={modalActive} setActive={setModalActive}>
-                <div className='modal-window'>
-                    <img src={image} alt={name} />
-                    <h3>{name}</h3>
-                    <p>{description}</p>
+                <div className='modal-window-container'>
+                    <div className="current-recipe">
+                        <img src={image} alt="" />
+                        <div className="details">
+                            <h2>{name}</h2>
+                            <h4>{kindOfMeal}</h4>
+                        </div>
+                        <div className="ingredient-con">
+                            <ul>
+                                {
+                                    ingredientsArr.map(item => (
+                                        <li key={item}>{item}</li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                        <button className="show-recipe">View full recipe</button>
+                    </div>
                 </div>
             </Modal>
         </>
     )
-};
+}
 
-export default RecipeCard;
+export default RecipeCard
