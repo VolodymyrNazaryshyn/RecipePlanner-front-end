@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import Modal from '../modal/Modal'
 import './styles.css'
+import { useNavigate } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
-    const { name, kindOfMeal, image, ingredients } = recipe
+    const { calories, cookingTime, diet, ingredientCount, name, kindOfMeal,
+        image, ingredients, id, cuisineType, description } = recipe
     const [modalActive, setModalActive] = useState(false)
+
+    let navigate = useNavigate()
 
     let ingredientsArr = []
     for (let i in ingredients) ingredientsArr.push(i)
@@ -35,7 +39,7 @@ const RecipeCard = ({ recipe }) => {
                                 }
                             </ul>
                         </div>
-                        <button className="show-recipe">View full recipe</button>
+                        <button className="show-recipe" onClick={() => navigate(`/recipe-info/${id}`)}>View full recipe</button>
                     </div>
                 </div>
             </Modal>

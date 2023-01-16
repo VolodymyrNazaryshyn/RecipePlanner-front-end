@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Link as NavLink, useLocation } from 'react-router-dom'
-import { Pagination, PaginationItem, TextField, Stack, Link } from '@mui/material'
+import { Pagination, PaginationItem, TextField, Stack } from '@mui/material'
 import Constants from "../utilities/Constants"
 import RecipeCard from './RecipeCard'
 
@@ -54,11 +54,7 @@ export default function RecipiesByNameOrIngredient(props) {
                         }
                     />
                 )}
-                {/* {
-                    recipes.map(recipe => (
-                        <Link key={recipe.id} href={recipe.image}>{recipe.name}</Link>
-                    ))
-                } */}
+
                 <div className='recipes-gallery'>
                     {recipes
                         ? recipes.map(recipe => (
