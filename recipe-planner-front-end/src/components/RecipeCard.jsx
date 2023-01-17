@@ -4,8 +4,7 @@ import './styles.css'
 import { useNavigate } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
-    const { calories, cookingTime, diet, ingredientCount, name, kindOfMeal,
-        image, ingredients, id, cuisineType, description } = recipe
+    const { name, kindOfMeal, image, ingredients, id } = recipe
     const [modalActive, setModalActive] = useState(false)
 
     let navigate = useNavigate()

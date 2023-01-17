@@ -6,17 +6,14 @@ import { useNavigate } from 'react-router-dom'
 export default function AllRecipies() {
     const [recipies, setRecipies] = useState([])
 
-    //const [arrKindOfMeal, setArrKindOfMeal] = useState([])
-    //const [arrCuisine, setArrCuisine] = useState([])
-    //const [arrDiet, setArrDiet] = useState([])
+    const [arrKindOfMeal] = useState([])
+    const [arrCuisine] = useState([])
+    const [arrDiet] = useState([])
 
     const [currentPage, setCurrentPage] = useState(1)
     const [isEnd, setIsEnd] = useState(false)
-    const headers = new Headers()
 
-    let arrKindOfMeal = []
-    let arrCuisine = []
-    let arrDiet = []
+    const [headers] = useState(new Headers())
 
     let navigate = useNavigate()
 
@@ -28,8 +25,7 @@ export default function AllRecipies() {
             })
                 .then(response => response.json())
                 .then((data) => {
-                    setRecipies(prev => [...prev, ...data])
-                    console.log(`current page: ${currentPage}`, data)
+                    if (data != null) setRecipies(prev => [...prev, ...data])
                 })
         } catch {
             setIsEnd(true)

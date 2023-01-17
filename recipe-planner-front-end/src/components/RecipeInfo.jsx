@@ -1,48 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Constants from '../utilities/Constants'
+import './styles.css'
 
 const RecipeInfo = () => {
     const [item, setItem] = useState()
+    const [ingredients, setIngredients] = useState()
     const { id } = useParams()
 
-    if (id !== "") {
+    function convert(obj) {
+        return Object.keys(obj).map(key => ({
+            name: key,
+            value: obj[key]
+        }));
+    }
+
+    useEffect(() => {
         fetch(Constants.API_URL_GET_RECIPE_BY_ID + id)
             .then(res => res.json())
             .then(data => {
-                console.log("data", data)
                 setItem(data)
+                setIngredients(convert(data.ingredients))
             })
-    }
+    }, [])
 
     return (
         <>
             {
                 (!item) ? "" : (<>
-                    <div className="content">
-                        <img src={item.image} alt="" />
-                        <div className="inner-content">
-                            <h1>{item.name}</h1>
-                            <h2>{!!item.cuisineType && item.cuisineType + " Cuisine"}</h2>
-                            <h3>{!!item.kindOfMeal && item.kindOfMeal}</h3>
-                        </div>
+                    <img className="recipe-img" src={item.image} alt="" />
+                    <h1 className="recipe-name">{item.name}</h1>
+                    <h2 className="recipe-cuisine">{!!item.cuisineType && item.cuisineType + " Cuisine"}</h2>
+                    <h3 className="recipe-kindOfMeal">{!!item.kindOfMeal && item.kindOfMeal}</h3>
+                    <div className="recipe-ingredients">
+                        <ul>
+                            {
+                                ingredients.map(item => (
+                                    <li key={item.name}>{item.name} : {item.value}</li>
+                                ))
+                            }
+                        </ul>
                     </div>
-                    <div className="recipe-details">
-                        {/* <div className="ingredients">
-                            <h2>Ingredients</h2><br />
-                            <h4>{item.strIngredient1} : {item.strMeasure1}</h4>
-                            <h4>{item.strIngredient2} : {item.strMeasure2}</h4>
-                            <h4>{item.strIngredient3} : {item.strMeasure3}</h4>
-                            <h4>{item.strIngredient4} : {item.strMeasure4}</h4>
-                            <h4>{item.strIngredient5} : {item.strMeasure5}</h4>
-                            <h4>{item.strIngredient6} : {item.strMeasure6}</h4>
-                            <h4>{item.strIngredient7} : {item.strMeasure7}</h4>
-                            <h4>{item.strIngredient8} : {item.strMeasure8}</h4>
-                        </div> */}
-                        <div className="instructions">
-                            <h2>Description</h2><br />
-                            <h4>{item.description}</h4>
-                        </div>
+                    <div className="recipe-description">
+                        <h2>Description</h2>
+                        <h4>{item.description}</h4>
                     </div>
                 </>)
             }
