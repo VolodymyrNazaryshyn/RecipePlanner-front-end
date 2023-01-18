@@ -4,40 +4,69 @@ import { Link as NavLink, useLocation } from 'react-router-dom'
 import { Pagination, PaginationItem, TextField, Stack } from '@mui/material'
 import Constants from "../utilities/Constants"
 import RecipeCard from './RecipeCard'
+import RecipeIndex from './RecipeIndex'
 
 export default function RecipiesByNameOrIngredient(props) {
-    const location = useLocation();
+    const location = useLocation()
     const [recipes, setRecipes] = useState([])
     const [query, setQuery] = useState('')
     const [page, setPage] = useState(parseInt(props.history.location.search?.split('=')[1] || 1))
-    const [totalPages, setTotalPages] = useState(0)
+    const [total, setTotal] = useState(0)
+    const [alpha, setAlpha] = useState('a')
+    const [isAlphaSearch, setAlphaSearch] = useState(true)
 
     useEffect(() => {
-        axios.get(Constants.API_URL_GET_RECIPIES_BY_NAME_OR_INGREDIENT + `${query}&page=${page}`)
-            .then(responce => {
-                setTotalPages(parseInt(responce.headers.get("totalpages")))
-                setRecipes(responce.data)
+        if (isAlphaSearch) {
+            axios.get(Constants.API_URL_GET_RECIPIES_BY_ALPHA + `${alpha}&count=${page}`)
+                .then(responce => {
+                    setTotal(parseInt(responce.headers.get("totalcount")))
+                    setRecipes(responce.data)
+                })
+        }
+    }, [page, alpha])
 
-                if (totalPages < page) {
-                    setPage(1)
-                    props.history.replace('/search')
-                }
-            })
-    }, [query, page, totalPages, location, props.history])
+    useEffect(() => {
+        if (!isAlphaSearch) {
+            axios.get(Constants.API_URL_GET_RECIPIES_BY_NAME_OR_INGREDIENT + `${query}&page=${page}`)
+                .then(responce => {
+                    setTotal(parseInt(responce.headers.get("totalpages")))
+                    setRecipes(responce.data)
+                    if (total < page) {
+                        setPage(1)
+                        props.history.replace('/search')
+                    }
+                })
+        }
+    }, [query, page, total, location, props.history])
 
     return (
         <>
+            <h2 className='search-recipies-title'>Search recipies by name or ingredient</h2>
             <TextField
+                sx={{
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                        "& > fieldset": {
+                            borderColor: "#584700"
+                        }
+                    }
+                }}
                 fullWidth
-                label="Search recipies by name or ingredient"
-                placeholder="chicken"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                placeholder="input 'pancakes' or 'onion'"
+                value={isAlphaSearch ? "" : query}
+                onChange={(event) => { setQuery(event.target.value); setAlphaSearch(false) }}
             />
+
+            <h2 className='search-recipies-title'>Search recipies by alpha</h2>
+            <div className='indexContainer'>
+                <RecipeIndex letter={alpha} alphaSearch={isAlphaSearch} alphaIndex={(alpha) => {
+                    setAlpha(alpha); setPage(1); setAlphaSearch(true)
+                }} />
+            </div>
+
             <Stack spacing={2}>
-                {!!totalPages && (
+                {!!total && (
                     <Pagination
-                        count={totalPages}
+                        count={total}
                         page={page}
                         onChange={(_, num) => setPage(num)}
                         showFirstButton
@@ -47,7 +76,7 @@ export default function RecipiesByNameOrIngredient(props) {
                             (item) => (
                                 <PaginationItem
                                     component={NavLink}
-                                    to={totalPages < page ? '' : `?page=${item.page}`}
+                                    to={total < page ? '' : `?page=${item.page}`}
                                     {...item}
                                 />
                             )
@@ -63,7 +92,7 @@ export default function RecipiesByNameOrIngredient(props) {
                                 recipe={recipe}
                             />
                         ))
-                        : "No Recipes!"}
+                        : "No recipies!"}
                 </div>
             </Stack>
         </>

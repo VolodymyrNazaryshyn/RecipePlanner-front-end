@@ -5,14 +5,11 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AllRecipies() {
     const [recipies, setRecipies] = useState([])
-
     const [arrKindOfMeal] = useState([])
     const [arrCuisine] = useState([])
     const [arrDiet] = useState([])
-
     const [currentPage, setCurrentPage] = useState(1)
     const [isEnd, setIsEnd] = useState(false)
-
     const [headers] = useState(new Headers())
 
     let navigate = useNavigate()
@@ -26,6 +23,7 @@ export default function AllRecipies() {
                 .then(response => response.json())
                 .then((data) => {
                     if (data != null) setRecipies(prev => [...prev, ...data])
+                    else setRecipies([])
                 })
         } catch {
             setIsEnd(true)
@@ -36,7 +34,6 @@ export default function AllRecipies() {
         setRecipies([])
         headers.delete(className)
         if (document.getElementById(id)?.checked) {
-            console.log("recipies.length", recipies.length)
             if (className === "checkbox-kindmeal") {
                 arrKindOfMeal.push(id)
                 headers.append(className, arrKindOfMeal.join(','))
@@ -172,9 +169,13 @@ export default function AllRecipies() {
 
             <div className='recipes-gallery'>
                 {
-                    recipies.map(recipe => (
-                        <RecipeCard key={recipe.id} recipe={recipe} />
-                    ))
+                    (!recipies.length) ? "No recipies!" : (<>
+                        {
+                            recipies.map(recipe => (
+                                <RecipeCard key={recipe.id} recipe={recipe} />
+                            ))
+                        }
+                    </>)
                 }
             </div>
         </>

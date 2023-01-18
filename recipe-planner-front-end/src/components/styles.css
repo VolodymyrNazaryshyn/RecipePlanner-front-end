@@ -7,9 +7,13 @@
   padding: 0;
 }
 
+:root {
+  --background: #fae594;
+}
+
 body,
 html {
-  background-color: #fae594;
+  background-color: var(--background);
 }
 
 div.recipes-gallery {
@@ -21,7 +25,7 @@ div.recipes-gallery {
 
 /* ========== RecipeCard.jsx ========== */
 div.recipe-card {
-  background-color: #fae594;
+  background-color: var(--background);
   border-radius: 10px;
   box-shadow: 0px 5px 10px 0px black;
   color: inherit;
@@ -30,7 +34,7 @@ div.recipe-card {
   padding-bottom: 10px;
   text-decoration: none;
   transition: all 0.4s ease;
-  width: 200px;
+  width: 250px;
 }
 
 div.recipe-card:hover {
@@ -40,6 +44,7 @@ div.recipe-card:hover {
 div.recipe-card img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  height: 50%;
   width: 100%;
 }
 
@@ -54,7 +59,7 @@ div.recipe-card div.card-body span.category {
 }
 
 .modal-window-container {
-  background-color: #fae594;
+  background-color: var(--background);
   border-radius: 0.6em;
   font-size: 14px;
   left: 50%;
@@ -63,7 +68,7 @@ div.recipe-card div.card-body span.category {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 450px;
 }
 
 .current-recipe img {
@@ -115,7 +120,7 @@ div.recipe-card div.card-body span.category {
   display: grid;
   color: #303040;
   font-size: 1.1em;
-  gap: 0.8em 1.1em;
+  gap: 1em 4em;
   grid-template-columns: auto auto;
   padding: 1.2em 0 0 1.2em;
   position: relative;
@@ -293,7 +298,7 @@ div.btn-search-recipies-by-name button:hover {
 .recipe-img {
   display: flex;
   margin: auto;
-  width: 400px;
+  width: 100%;
 }
 
 .recipe-name,
@@ -307,6 +312,7 @@ div.btn-search-recipies-by-name button:hover {
   font-size: 1.1em;
   gap: 0.8em 1.1em;
   grid-template-columns: auto auto;
+  margin-bottom: 1em;
   padding: 1.2em 0 0 1.2em;
   position: relative;
   text-transform: capitalize;
@@ -317,8 +323,37 @@ div.btn-search-recipies-by-name button:hover {
 }
 
 /* ========== RecipiesByNameOrIngredient.jsx ========== */
-
 div.indexContainer {
   display: flex;
-  margin: 2.5rem 0;
+  margin: 0;
+}
+
+h2.search-recipies-title {
+  color: #584700;
+  font-size: xx-large;
+  margin: 1rem;
+  text-align: center;
+  text-shadow: 0px 0px 5px white;
+}
+
+/* ========== RecipeIndex.jsx ========== */
+label.label-alpha {
+  align-items: center;
+  background-color: #584700;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin: 0 5px 0 5px;
+  width: 50px;
+}
+
+input.checkbox-alpha {
+  display: none;
+}
+
+input.checkbox-alpha:checked + label.label-alpha {
+  background-color: #a38300;
 }

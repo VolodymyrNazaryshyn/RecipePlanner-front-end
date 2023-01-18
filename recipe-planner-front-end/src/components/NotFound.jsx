@@ -1,7 +1,7 @@
 const NotFound = () => {
     return (
         <div>
-            Recipe Not Found! 🍕🍔🍟
+            Recipe Not Found!
         </div>
     )
 }
