@@ -71,6 +71,11 @@ div.recipe-card div.card-body span.category {
   width: 450px;
 }
 
+.modal-window-container .current-recipe h3 {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
 .current-recipe img {
   display: block;
   margin: 1.8em auto 0 auto;
@@ -116,15 +121,25 @@ div.recipe-card div.card-body span.category {
   background-color: #da8d00;
 }
 
+.ingredient-con {
+  max-height: 200px;
+  min-height: 0px;
+  overflow: auto;
+}
+
 .ingredient-con ul {
-  display: grid;
   color: #303040;
   font-size: 1.1em;
-  gap: 1em 4em;
-  grid-template-columns: auto auto;
-  padding: 1.2em 0 0 1.2em;
-  position: relative;
+  list-style: none;
   text-transform: capitalize;
+}
+
+.ingredient-con ul li {
+  background-color: #e9c94a;
+  border-radius: 5px;
+  display: inline-block;
+  margin: .3em;
+  padding: .3em;
 }
 
 .modal__content {
@@ -323,17 +338,30 @@ div.btn-search-recipies-by-name button:hover {
 }
 
 /* ========== RecipiesByNameOrIngredient.jsx ========== */
-div.indexContainer {
-  display: flex;
-  margin: 0;
+p.quote {
+  text-align: center;
+  margin-bottom: 1em;
 }
 
-h2.search-recipies-title {
+h2.search-recipies-title,
+h3.search-result-title {
   color: #584700;
-  font-size: xx-large;
   margin: 1rem;
   text-align: center;
   text-shadow: 0px 0px 5px white;
+}
+
+h2.search-recipies-title {
+  font-size: xx-large;
+}
+
+h3.search-result-title {
+  font-size: x-large;
+}
+
+div.indexContainer {
+  display: flex;
+  margin: 0;
 }
 
 /* ========== RecipeIndex.jsx ========== */
@@ -354,6 +382,6 @@ input.checkbox-alpha {
   display: none;
 }
 
-input.checkbox-alpha:checked + label.label-alpha {
+input.checkbox-alpha:checked+label.label-alpha {
   background-color: #a38300;
 }

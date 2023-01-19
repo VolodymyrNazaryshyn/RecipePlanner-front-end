@@ -1,0 +1,78 @@
+:root {
+    --background-navbar: #584700;
+  }
+
+.navbar {
+    align-items: center;
+    background-color: var(--background-navbar);
+    box-shadow: 0px 0px 30px var(--background-navbar);
+    display: flex;
+    justify-content: start;
+    height: 60px;
+}
+
+.menu-bars {
+    background: none;
+    font-size: 1.8rem;
+    margin-left: 2rem;
+}
+
+.nav-menu {
+    background-color: var(--background-navbar);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    left: -100%;
+    position: fixed;
+    top: 0;
+    transition: 850ms;
+    width: 250px;
+    z-index: 100;
+}
+
+.nav-menu.active {
+    left: 0;
+    transition: 350ms;
+}
+
+.nav-text {
+    align-items: center;
+    display: flex;
+    justify-content: start;
+    height: 60px;
+    list-style: none;
+    padding: 8px 0px 8px 16px;
+}
+
+.nav-text a {
+    align-items: center;
+    border-radius: 4px;
+    color: #f5f5f5;
+    display: flex;
+    font-size: 22px;
+    height: 100%;
+    padding: 0 16px;
+    text-decoration: none;
+    width: 95%;
+}
+
+.nav-text a:hover {
+    background-color: #a08000;
+}
+
+.nav-menu-items {
+    width: 100%;
+}
+
+.navbar-toggle {
+    align-items: center;
+    background-color: var(--background-navbar);
+    display: flex;
+    justify-content: start;
+    height: 80px;
+    width: 100%;
+}
+
+span {
+    margin-left: 16px;
+}

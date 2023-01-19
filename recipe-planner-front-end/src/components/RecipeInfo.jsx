@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Constants from '../utilities/Constants'
 import convert from '../utilities/Convert'
-import './styles.css'
+import '../css/styles.css'
 
 const RecipeInfo = () => {
     const [recipe, setRecipe] = useState()

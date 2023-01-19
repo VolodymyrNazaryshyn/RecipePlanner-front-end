@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Modal from '../modal/Modal'
 import convert from '../utilities/Convert'
-import './styles.css'
+import '../css/styles.css'
 import { useNavigate } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
@@ -22,8 +22,8 @@ const RecipeCard = ({ recipe }) => {
                     <h3>{recipe.name}</h3>
                     <h3>⏳ {recipe.cookingTime} min</h3>
                     <h4>{recipe.ingredientCount} ingredients</h4>
-                    <h4>{!!recipe.cuisineType && recipe.cuisineType + " Cuisine"}</h4>
-                    <h4>{!!recipe.diet && recipe.diet + " Diet"}</h4>
+                    <h4>{!!recipe.cuisineType && recipe.cuisineType + " cuisine"}</h4>
+                    <h4>{!!recipe.diet && recipe.diet + " diet"}</h4>
                     <h4>{getCalories()}</h4>
                 </div>
             </div>

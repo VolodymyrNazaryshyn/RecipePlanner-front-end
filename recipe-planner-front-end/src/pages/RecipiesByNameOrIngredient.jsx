@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import { Link as NavLink, useLocation } from 'react-router-dom'
 import { Pagination, PaginationItem, TextField, Stack } from '@mui/material'
 import Constants from "../utilities/Constants"
-import RecipeCard from './RecipeCard'
-import RecipeIndex from './RecipeIndex'
+import RecipeCard from '../components/RecipeCard'
+import RecipeIndex from '../components/RecipeIndex'
 
 export default function RecipiesByNameOrIngredient(props) {
     const location = useLocation()
@@ -42,6 +42,7 @@ export default function RecipiesByNameOrIngredient(props) {
     return (
         <>
             <h2 className='search-recipies-title'>Search recipies by name or ingredient</h2>
+            <p className='quote'><q>Real food doesn't have ingredients, real food is ingredients.</q><i>— Jamie Oliver</i></p>
             <TextField
                 sx={{
                     "& .MuiOutlinedInput-root.Mui-focused": {
@@ -51,7 +52,7 @@ export default function RecipiesByNameOrIngredient(props) {
                     }
                 }}
                 fullWidth
-                placeholder="input 'pancakes' or 'onion'"
+                placeholder="Enter 'pancakes' or 'onion'"
                 value={isAlphaSearch ? "" : query}
                 onChange={(event) => { setQuery(event.target.value); setAlphaSearch(false) }}
             />
@@ -84,6 +85,7 @@ export default function RecipiesByNameOrIngredient(props) {
                     />
                 )}
 
+                <h3 className='search-result-title'>{recipes ? "Your Search Results:" : ''}</h3>
                 <div className='recipes-gallery'>
                     {recipes
                         ? recipes.map(recipe => (

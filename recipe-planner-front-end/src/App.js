@@ -1,25 +1,36 @@
 import React, { useRef } from 'react'
+import Navbar from './components/Navbar'
 import { Container } from '@mui/material'
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { createBrowserHistory } from "history"
-
-import RecipiesByNameOrIngredient from "./components/RecipiesByNameOrIngredient"
-import AllRecipies from "./components/AllRecipies"
+import Home from "./pages/Home"
+import AllRecipies from "./pages/AllRecipies"
+import RecipiesByNameOrIngredient from "./pages/RecipiesByNameOrIngredient"
+import Profile from './pages/Profile'
+import AddRecipe from './pages/AddRecipe'
+import Logout from './pages/Logout'
+import NotFound from "./pages/NotFound"
 import RecipeInfo from './components/RecipeInfo'
-import NotFound from "./components/NotFound"
 
 function App() {
   const { current: history } = useRef(createBrowserHistory({ window }))
 
   return (
-    <Container sx={{ marginTop: 5 }} maxWidth="md">
-      <Routes>
-        <Route exact path="/" element={<AllRecipies />} />
-        <Route exact path="/search" element={<RecipiesByNameOrIngredient history={history} />} />
-        <Route exact path="/recipe-info/:id" element={<RecipeInfo />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Container>
+    <BrowserRouter>
+      <Navbar />
+      <Container sx={{ marginTop: 5 }} maxWidth="md">
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/recipe-filter" element={<AllRecipies />} />
+          <Route path="/search" element={<RecipiesByNameOrIngredient history={history} />} />
+          <Route path="/recipe-info/:id" element={<RecipeInfo />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/add-recipe" element={<AddRecipe />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   )
 }
 

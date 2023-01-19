@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Constants from '../utilities/Constants'
-import RecipeCard from './RecipeCard'
+import RecipeCard from '../components/RecipeCard'
 import { useNavigate } from 'react-router-dom'
 
 export default function AllRecipies() {
