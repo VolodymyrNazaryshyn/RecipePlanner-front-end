@@ -21,10 +21,7 @@ function Login() {
 
         axios.post(Constants.API_URL_POST_LOGIN, formData)
             .then(response => {
-                console.log("userid", response.headers.get("userid"));
                 localStorage.setItem('userid', JSON.stringify(response.headers.get("userid")));
-                console.log("localStorage", localStorage.getItem('userid'))
-                console.log("data", response.data)
                 if (response.data === "Ok") {
                     navigate("/")
                 }

@@ -41,7 +41,7 @@ div.recipe-card:hover {
   transform: scale(1.1);
 }
 
-div.recipe-card img {
+div.recipe-card>img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 50%;
@@ -71,9 +71,28 @@ div.recipe-card div.card-body span.category {
   width: 450px;
 }
 
-.modal-window-container .current-recipe h3 {
+.modal-window-container .current-recipe .recipe-info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-window-container .current-recipe .recipe-info-box h3 {
   margin-bottom: 1em;
   margin-top: 1em;
+}
+
+.cuisine-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.cuisine-info img {
+  max-width: 30px;
+  position: absolute;
+  bottom: 0px;
+  left: -20px;
 }
 
 .current-recipe img {

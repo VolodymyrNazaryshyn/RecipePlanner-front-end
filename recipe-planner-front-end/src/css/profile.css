@@ -61,6 +61,12 @@ table.profile-main-table {
     width: 95%;
 }
 
+.profile-pass-box small {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
 .change-pass-btn {
     margin-top: 10px;
     width: 100%;

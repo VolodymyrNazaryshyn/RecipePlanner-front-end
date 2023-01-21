@@ -35,7 +35,13 @@ const RecipeCard = ({ recipe }) => {
                             <h2>{recipe.name}</h2>
                             <h4>{recipe.kindOfMeal}</h4>
                         </div>
-                        <h3>Ingredients</h3>
+                        <div className='recipe-info-box'>
+                            <h3>Ingredients</h3>
+                            <div className='cuisine-info'>
+                                {!!recipe.cuisineType && <img src={`/img/flags/${recipe.cuisineType}.png`} alt="" />}
+                                <span>{!!recipe.cuisineType && recipe.cuisineType + " cuisine"}</span>
+                            </div>
+                        </div>
                         <div className="ingredient-con">
                             <ul>
                                 {

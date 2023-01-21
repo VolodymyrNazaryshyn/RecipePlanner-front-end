@@ -7,7 +7,12 @@ const ENDPOINTS = {
     GET_RECIPIES_BY_ALPHA: 'RecipesFilterController/GetRecipiesByAlpha?alpha=',
     POST_REGISTER: 'AuthController/Register',
     POST_LOGIN: 'AuthController/Login',
-    GET_CURRENT_USER: 'AuthController/GetCurrentUser'
+    GET_CURRENT_USER: 'AuthController/GetCurrentUser',
+    PUT_USERNAME: 'AuthController/ChangeUserName?newName=',
+    PUT_EMAIL: 'AuthController/ChangeEmail?newEmail=',
+    PUT_BIRTHDAY: 'AuthController/ChangeBirthdayDate?newBirthday=',
+    PUT_REGION: 'AuthController/ChangeRegion?newRegion=',
+    PUT_PASSWORD: 'AuthController/ChangePassword?'
 }
 
 const Constants = {
@@ -17,7 +22,12 @@ const Constants = {
     API_URL_GET_RECIPIES_BY_ALPHA: `${API_BASE_URL}/${ENDPOINTS.GET_RECIPIES_BY_ALPHA}`,
     API_URL_POST_REGISTER: `${API_BASE_URL}/${ENDPOINTS.POST_REGISTER}`,
     API_URL_POST_LOGIN: `${API_BASE_URL}/${ENDPOINTS.POST_LOGIN}`,
-    API_URL_GET_CURRENT_USER: `${API_BASE_URL}/${ENDPOINTS.GET_CURRENT_USER}`
+    API_URL_GET_CURRENT_USER: `${API_BASE_URL}/${ENDPOINTS.GET_CURRENT_USER}`,
+    API_URL_PUT_USERNAME: `${API_BASE_URL}/${ENDPOINTS.PUT_USERNAME}`,
+    API_URL_PUT_EMAIL: `${API_BASE_URL}/${ENDPOINTS.PUT_EMAIL}`,
+    API_URL_PUT_BIRTHDAY: `${API_BASE_URL}/${ENDPOINTS.PUT_BIRTHDAY}`,
+    API_URL_PUT_REGION: `${API_BASE_URL}/${ENDPOINTS.PUT_REGION}`,
+    API_URL_PUT_PASSWORD: `${API_BASE_URL}/${ENDPOINTS.PUT_PASSWORD}`
 }
 
 export default Constants

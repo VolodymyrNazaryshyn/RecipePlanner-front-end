@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../css/profile.css'
 import Constants from '../utilities/Constants'
 import { useNavigate } from 'react-router-dom'
+import { subtractYears, getParseDateString } from '../utilities/dateFunctions'
 
 function Profile() {
   const [name, setName] = useState('')
@@ -9,6 +10,20 @@ function Profile() {
   const [birthdayDate, setBirthdayDate] = useState('')
   const [gender, setGender] = useState('')
   const [region, setRegion] = useState('')
+  const [isNameEditable, setIsNameEditable] = useState(false)
+  const [isEmailEditable, setIsEmailEditable] = useState(false)
+  const [isBirthdayDateEditable, setIsBirthdayDateEditable] = useState(false)
+  const [isRegionEditable, setIsRegionEditable] = useState(false)
+
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [isOldPassServerErr, setIsOldPassServerErr] = useState(false)
+  const [isNewPassServerErr, setIsNewPassServerErr] = useState(false)
+  const [isConfirmPassServerErr, setIsConfirmPassServerErr] = useState(false)
+  const [oldPassErrMsg, setOldPassErrMsg] = useState('')
+  const [newPassErrMsg, setNewPassErrMsg] = useState('')
+  const [confirmPassErrMsg, setConfirmPassErrMsg] = useState('')
 
   let headers = new Headers()
   let navigate = useNavigate()
@@ -33,13 +48,184 @@ function Profile() {
           else {
             setName(data.userName)
             setEmail(data.email)
-            setBirthdayDate(data.birthdayDate.substring(0, 10))
+            setBirthdayDate(data.birthdayDate?.substring(0, 10))
             setGender(data.gender)
             setRegion(data.region)
           }
         })
     }
   }, [])
+
+  function EditName() {
+    if (!isNameEditable) {
+      setIsNameEditable(true)
+      document.getElementById("editName").innerText = "Save"
+    }
+    else {
+      headers.append('current-user-id',
+        localStorage.getItem('userid').replaceAll('"', ''))
+
+      fetch(Constants.API_URL_PUT_USERNAME + name, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data === "Ok") {
+            setIsNameEditable(false)
+            document.getElementById("editName").innerText = "Edit"
+          }
+          else {
+            alert("Error: " + data)
+          }
+        })
+    }
+  }
+
+  function EditEmail() {
+    if (!isEmailEditable) {
+      setIsEmailEditable(true)
+      document.getElementById("editEmail").innerText = "Save"
+    }
+    else {
+      headers.append('current-user-id',
+        localStorage.getItem('userid').replaceAll('"', ''))
+
+      fetch(Constants.API_URL_PUT_EMAIL + email, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data === "Ok") {
+            setIsEmailEditable(false)
+            document.getElementById("editEmail").innerText = "Edit"
+          }
+          else {
+            alert("Error: " + data)
+          }
+        })
+    }
+  }
+
+  function EditBirthdayDate() {
+    if (!isBirthdayDateEditable) {
+      setIsBirthdayDateEditable(true)
+      document.getElementById("editBirthdayDate").innerText = "Save"
+    }
+    else {
+      headers.append('current-user-id',
+        localStorage.getItem('userid').replaceAll('"', ''))
+
+      fetch(Constants.API_URL_PUT_BIRTHDAY + birthdayDate, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data === "Ok") {
+            setIsBirthdayDateEditable(false)
+            document.getElementById("editBirthdayDate").innerText = "Edit"
+          }
+          else {
+            alert("Error: " + data)
+          }
+        })
+    }
+  }
+
+  function EditRegion() {
+    if (!isRegionEditable) {
+      setIsRegionEditable(true)
+      document.getElementById("editRegion").innerText = "Save"
+    }
+    else {
+      headers.append('current-user-id',
+        localStorage.getItem('userid').replaceAll('"', ''))
+
+      fetch(Constants.API_URL_PUT_REGION + region, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data === "Ok") {
+            setIsRegionEditable(false)
+            document.getElementById("editRegion").innerText = "Edit"
+          }
+          else {
+            alert("Error: " + data)
+          }
+        })
+    }
+  }
+
+  function IsEmptyOldPassword() {
+    return oldPassword === "" || oldPassword.length < 5
+  }
+
+  function IsEmptyNewPassword() {
+    return newPassword === "" || newPassword.length < 5
+  }
+
+  function IsEmptyConfirmPassword() {
+    return confirmPassword === "" || confirmPassword.length < 5
+  }
+
+  function ChangePassword() {
+    headers.append('current-user-id',
+      localStorage.getItem('userid').replaceAll('"', ''))
+
+    if (IsEmptyOldPassword())
+      setOldPassErrMsg("* Password cant be empty or less then 5 symbols!")
+
+    if (IsEmptyNewPassword())
+      setNewPassErrMsg("* Password cant be empty or less then 5 symbols!")
+
+    if (IsEmptyConfirmPassword())
+      setConfirmPassErrMsg("* Password cant be empty or less then 5 symbols!")
+
+    if (!IsEmptyOldPassword() && !IsEmptyNewPassword() && !IsEmptyConfirmPassword()) {
+      fetch(Constants.API_URL_PUT_PASSWORD + `oldPassword=${oldPassword}&newPassword1=${newPassword}&newPassword2=${confirmPassword}`, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data === "Ok") {
+            alert("Your password was successfully changed!\nYou need to log in again.")
+            localStorage.removeItem('userid')
+            navigate("/login")
+          }
+          else {
+            if (data === "You wrote a wrong password!") {
+              setIsOldPassServerErr(true)
+              setOldPassErrMsg("* You wrote a wrong old password!")
+              setIsNewPassServerErr(false)
+              setIsConfirmPassServerErr(false)
+              setNewPassErrMsg('')
+              setConfirmPassErrMsg('')
+            }
+            else if (data === "Passwords must be similar!") {
+              setIsNewPassServerErr(true)
+              setIsConfirmPassServerErr(true)
+              setNewPassErrMsg("* Passwords must be similar!")
+              setConfirmPassErrMsg("* Passwords must be similar!")
+              setIsOldPassServerErr(false)
+              setOldPassErrMsg('')
+            }
+            else if (data === "Old and new password cant be similar!") {
+              setIsOldPassServerErr(true)
+              setIsNewPassServerErr(true)
+              setOldPassErrMsg("* Old and new password cant be similar!")
+              setNewPassErrMsg("* Old and new password cant be similar!")
+              setIsConfirmPassServerErr(false)
+              setConfirmPassErrMsg('')
+            }
+          }
+        })
+    }
+  }
 
   return (
     <>
@@ -51,18 +237,33 @@ function Profile() {
               <tbody>
                 <tr>
                   <td>Username</td>
-                  <td>{name}</td>
-                  <td><button>Edit</button></td>
+                  <td>
+                    {isNameEditable
+                      ? <input type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
+                      : <span>{name}</span>}
+                  </td>
+                  <td><button onClick={EditName} id="editName">Edit</button></td>
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td>{email}</td>
-                  <td><button>Edit</button></td>
+                  <td>
+                    {isEmailEditable
+                      ? <input type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
+                      : <span>{email}</span>}
+                  </td>
+                  <td><button onClick={EditEmail} id="editEmail">Edit</button></td>
                 </tr>
                 <tr>
                   <td>Bitrhday date</td>
-                  <td>{birthdayDate}</td>
-                  <td><button>Edit</button></td>
+                  <td>
+                    {isBirthdayDateEditable
+                      ? <input type="date" defaultValue={birthdayDate}
+                        onChange={(e) => setBirthdayDate(e.target.value)}
+                        min={subtractYears(new Date(), 100)}
+                        max={getParseDateString(new Date().toLocaleDateString())} />
+                      : <span>{birthdayDate}</span>}
+                  </td>
+                  <td><button onClick={EditBirthdayDate} id="editBirthdayDate">Edit</button></td>
                 </tr>
                 <tr>
                   <td>Gender</td>
@@ -70,8 +271,22 @@ function Profile() {
                 </tr>
                 <tr>
                   <td>Region</td>
-                  <td>{region}</td>
-                  <td><button>Edit</button></td>
+                  <td>
+                    {isRegionEditable
+                      ? <select name="region"
+                        onChange={(e) => setRegion(e.target.value)}
+                        value={region}>
+                        <option disabled defaultValue>Choose region</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Australia/Oceania">Australia/Oceania</option>
+                      </select>
+                      : <span>{region}</span>}
+                  </td>
+                  <td><button onClick={EditRegion} id="editRegion">Edit</button></td>
                 </tr>
               </tbody>
             </table>
@@ -81,18 +296,24 @@ function Profile() {
           <div className="profile-pass-info">
             <div className="profile-pass-box">
               <label>Old password</label>
-              <input type="password" />
+              <input type="password" onChange={(e) => setOldPassword(e.target.value)}
+                style={isOldPassServerErr ? { border: "2px solid red" } : {}} />
+              <small>{(IsEmptyOldPassword() || isOldPassServerErr) ? oldPassErrMsg : ''}</small>
             </div>
             <div className="profile-pass-box">
               <label>New password</label>
-              <input type="password" />
+              <input type="password" onChange={(e) => setNewPassword(e.target.value)}
+                style={isNewPassServerErr ? { border: "2px solid red" } : {}} />
+              <small>{(IsEmptyNewPassword() || isNewPassServerErr) ? newPassErrMsg : ''}</small>
             </div>
             <div className="profile-pass-box">
               <label>Confirm new password</label>
-              <input type="password" />
+              <input type="password" onChange={(e) => setConfirmPassword(e.target.value)}
+                style={isConfirmPassServerErr ? { border: "2px solid red" } : {}} />
+              <small>{(IsEmptyConfirmPassword() || isConfirmPassServerErr) ? confirmPassErrMsg : ''}</small>
             </div>
           </div>
-          <button className="change-pass-btn">Change password</button>
+          <button className="change-pass-btn" onClick={ChangePassword}>Change password</button>
         </div>
       </div>
 
