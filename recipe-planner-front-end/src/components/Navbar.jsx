@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { SidebarData } from './SidebarData'
+import { SidebarDataUnauthorized, SidebarDataAuthorized } from './SidebarData'
 import { IconContext } from 'react-icons'
-import * as FaIcons from 'react-icons/fa' // FaBars
-import * as AiIcons from 'react-icons/ai' // AiOutlineClose
+import * as FaIcons from 'react-icons/fa'
+import * as AiIcons from 'react-icons/ai'
 import './Navbar.css'
 
 function Navbar() {
@@ -26,16 +26,31 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
+            {
+              localStorage.getItem('userid') !== null
+                ?
+                SidebarDataAuthorized.map((item, index) => {
+                  return (
+                    <li key={index} className={item.cName}>
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  )
+                })
+                :
+                SidebarDataUnauthorized.map((item, index) => {
+                  return (
+                    <li key={index} className={item.cName}>
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  )
+                })
+            }
           </ul>
         </nav>
       </IconContext.Provider>

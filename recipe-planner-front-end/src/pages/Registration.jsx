@@ -9,7 +9,15 @@ function Registration() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [birthdayDate, setBirthdayDate] = useState('')
     const [gender, setGender] = useState('')
-    const [region, setRegion] = useState('')
+    const [region, setRegion] = useState('Choose region')
+
+    const [serverError, setServerError] = useState('')
+    const [isHiddenError, setIsHiddenError] = useState(true)
+    const [isUsernameError, setIsUsernameError] = useState(false)
+    const [isEmailError, setIsEmailError] = useState(false)
+    const [isPasswordError, setIsPasswordError] = useState(false)
+    const [isPassword2Error, setIsPassword2Error] = useState(false)
+    const [isBirthdayDateError, setIsBirthdayDateError] = useState(false)
 
     let navigate = useNavigate()
 
@@ -25,13 +33,38 @@ function Registration() {
         formData.append('gender', gender)
         formData.append('region', region)
 
+
         fetch(Constants.API_URL_POST_REGISTER, {
             body: formData,
             method: "post"
         }).then(response => response.json())
             .then(data => {
                 console.log(data)
-                if (data == "Ok") navigate("/login")
+                if (data === "Ok") {
+                    navigate("/login")
+                }
+                else {
+                    data === "User name cant be empty or less then 3 letters!"
+                        ? setIsUsernameError(true) : setIsUsernameError(false)
+
+                    data === "Email cant be empty!" || data === "User with this email already exists!"
+                        ? setIsEmailError(true) : setIsEmailError(false)
+
+                    if (data === "Password cant be empty or less then 5 symbols!") {
+                        setIsPasswordError(true)
+                        setIsPassword2Error(true)
+                    }
+                    else {
+                        setIsPasswordError(false)
+                        setIsPassword2Error(false)
+                    }
+
+                    data === "Passwords must be similar!"
+                        ? setIsPassword2Error(true) : setIsPassword2Error(false)
+
+                    setServerError("Error: " + data)
+                    setIsHiddenError(false)
+                }
             })
     }
 
@@ -49,6 +82,7 @@ function Registration() {
                                 placeholder="Enter Username"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                style={isUsernameError ? { border: "2px solid red" } : {}}
                             />
                         </div>
                         <div className="reg-user-input-box">
@@ -59,6 +93,7 @@ function Registration() {
                                 placeholder="Enter email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                style={isEmailError ? { border: "2px solid red" } : {}}
                             />
                         </div>
                         <div className="reg-user-input-box">
@@ -69,6 +104,7 @@ function Registration() {
                                 placeholder="Enter password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                style={isPasswordError ? { border: "2px solid red" } : {}}
                             />
                         </div>
                         <div className="reg-user-input-box">
@@ -79,6 +115,7 @@ function Registration() {
                                 placeholder="Confirm password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
+                                style={isPasswordError || isPassword2Error ? { border: "2px solid red" } : {}}
                             />
                         </div>
                         <div className="reg-user-input-box">
@@ -114,6 +151,7 @@ function Registration() {
                             <select name="region"
                                 onChange={(e) => setRegion(e.target.value)}
                                 value={region}>
+                                <option disabled defaultValue>Choose region</option>
                                 <option value="Asia">Asia</option>
                                 <option value="Africa">Africa</option>
                                 <option value="Europe">Europe</option>
@@ -121,6 +159,9 @@ function Registration() {
                                 <option value="South America">South America</option>
                                 <option value="Australia/Oceania">Australia/Oceania</option>
                             </select>
+                        </div>
+                        <div className='error-box'>
+                            <textarea hidden={isHiddenError} readOnly value={serverError} />
                         </div>
                     </div>
                     <div className="reg-form-submit-btn">

@@ -74,7 +74,6 @@
     width: 95%;
     border-radius: 7px;
     outline: none;
-    border: 1px solid grey;
     padding: 10px;
 }
 
@@ -162,6 +161,21 @@
     color: white;
 }
 
+.error-box textarea {
+    height: 80px;
+    width: 285px;
+    resize: none;
+    overflow: hidden;
+    padding: 20px;
+    border-radius: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+.error-box textarea:focus {
+    outline: none;
+}
+
 /* ------------- Login Page ------------- */
 
 .login-container {
@@ -212,6 +226,12 @@
     outline: none;
     border: 1px solid rgb(196, 192, 192);
     padding: 10px;
+}
+
+.login-user-input-box small {
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .login-form-submit-btn {
@@ -393,6 +413,15 @@
     .main-reg-user-info::-webkit-scrollbar,
     .main-profile-info::-webkit-scrollbar {
         width: 0;
+    }
+
+    .gender-detals-box {
+        margin-left: 100px;
+        display: flex;
+    }
+
+    .gender-category {
+        justify-content: center;
     }
 }
 
