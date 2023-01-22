@@ -167,6 +167,9 @@ function Registration() {
                     <div className="reg-form-submit-btn">
                         <input type="submit" value="Register" />
                     </div>
+                    <div className='login-btn'>
+                        <a href="/login">Do you have an account? Sign in</a>
+                    </div>
                 </form>
             </div>
         </div>
