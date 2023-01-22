@@ -1,0 +1,120 @@
+.ingredients-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 520px;
+    min-height: 140px;
+    background: #be863170;
+    text-align: center;
+    margin: 15px auto;
+    border-radius: 10px;
+    padding: 32px 0 32px 0;
+    box-shadow: 0px 0px 10px black;
+}
+
+.complete {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.ingredient-form {
+    margin-bottom: 32px;
+}
+
+.ingredient-input {
+    padding: 10px 25px 12px 11px;
+    border-radius: 4px 0 0 4px;
+    border: 2px solid #523009;
+    outline: none;
+    width: 355px;
+    background-color: #ffffff70;
+    font-size: 17px;
+}
+
+/* .ingredient-input::placeholder {
+    color: white;
+} */
+
+.ingredient-button {
+    padding: 16px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(90deg,
+            #523009 0%,
+            #996529 100%);
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.ingredient-input.edit {
+    border: 2px solid #747211;
+}
+
+.ingredient-button.edit {
+    background: linear-gradient(90deg,
+            #747211 0%,
+            #a09e13 100%);
+    padding: 16px 22px;
+}
+
+.ingredient-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.ingredient-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px auto;
+    color: #fff;
+    background: linear-gradient(90deg,
+            #78b12e 0%,
+            #a6e257 100%);
+
+    padding: 16px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+    text-shadow: 2px 2px 2px black;
+    width: 90%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ingredient-row:nth-child(4n + 1) {
+    background: linear-gradient(90deg,
+            #83850c 0%,
+            #dde012 100%);
+}
+
+.ingredient-row:nth-child(4n + 2) {
+    background: linear-gradient(90deg,
+            #9e592b 0%,
+            #b87b52 100%);
+}
+
+.ingredient-row:nth-child(4n + 3) {
+    background: linear-gradient(90deg,
+            rgba(20, 159, 255, 1) 0%,
+            rgb(95, 141, 201) 100%);
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.delete-icon {
+    margin-right: 5px;
+    color: #fff;
+}
+
+.edit-icon {
+    color: #fff;
+}

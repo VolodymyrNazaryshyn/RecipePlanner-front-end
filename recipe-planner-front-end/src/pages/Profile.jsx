@@ -57,6 +57,15 @@ function Profile() {
             setRegion(data.region)
           }
         })
+
+      fetch(Constants.API_URL_GET_USER_RECIPIES, {
+        method: 'GET',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data);
+        })
     }
   }, [])
 
@@ -291,37 +300,24 @@ function Profile() {
       <div className="profile-recipes-controller">
         <h1 className="form-title">My Recipes</h1>
         <div className="profile-recipes-info">
-
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Banana Smoothie</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Spaghetti</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Split Pea Soup</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
+          {/* {
+            (!recipies.length) ? "No recipies!" : (<>
+              {
+                recipies.map(recipe => (
+                  <div className="profile-recipe-background">
+                    <div className="profile-recipe-box">
+                      <label>Banana Smoothie</label>
+                      <div className="recipe-box-btn">
+                        <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
+                        <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
+                        <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </>)
+          } */}
         </div>
         <button className="add-recipe-btn" onClick={() => navigate("/add-recipe")}>Add recipe <MdIcons.MdOutlinePostAdd /></button>
       </div>
