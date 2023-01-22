@@ -1,3 +1,4 @@
+/* ---------- profile-info-controller ---------- */
 .profile-controller {
     display: flex;
     flex-direction: column;
@@ -13,8 +14,9 @@
 .profile-info-controller {
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 10px;
-    background-color: #b36d0470;
+    margin-bottom: 20px;
+    background-color: #dda85870;
+    box-shadow: 0px 0px 10px black;
 }
 
 .profile-main-info {
@@ -23,15 +25,48 @@
 }
 
 table.profile-main-table {
-    border-spacing:  0 40px;
+    border-spacing: 0 30px;
 }
 
-/* ---------- ---------- */
+table.profile-main-table tr td:nth-child(1) {
+    font-weight: bold;
+}
+
+table.profile-main-table tr td:nth-child(2) span {
+    margin: 0;
+    font-size: 18px;
+}
+
+.name-input,
+.email-input,
+.date-input,
+.region-select {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #f5cd9270;
+}
+
+table.profile-main-table button {
+    background-color: #fffbf6;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+    padding: 5px;
+}
+
+table.profile-main-table button:hover {
+    background-color: #ebdbc6;
+}
+
+/* ---------- profile-pass-controller ---------- */
 
 .profile-pass-controller {
-    border-radius: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
     padding: 10px;
-    background-color: rgba(177, 177, 177, 0.438);
+    background-color: #dda85870;
+    margin-bottom: 20px;
 }
 
 .profile-pass-info {
@@ -45,16 +80,15 @@ table.profile-main-table {
     width: 30%;
 }
 
-
 .profile-pass-box label {
     text-align: center;
-    font-size: 12px;
+    font-size: 17px;
     width: 95%;
     font-weight: 550;
 }
 
 .profile-pass-box input {
-    padding-left: 5px;
+    padding: 13px;
     height: 20px;
     border-radius: 7px;
     border: 1px solid grey;
@@ -70,10 +104,17 @@ table.profile-main-table {
 .change-pass-btn {
     margin-top: 10px;
     width: 100%;
-    font-size: 12px;
+    font-size: 15px;
     padding: 5px;
     border: none;
     border-radius: 3px;
+    cursor: pointer;
+    background-color: #fffbf6;
+    border: 1px solid darkgray;
+}
+
+.change-pass-btn:hover {
+    background-color: #ebdbc6;
 }
 
 .profile-img {
@@ -87,14 +128,15 @@ table.profile-main-table {
     height: 20px;
 }
 
-/* ---------- ---------- */
+/* ---------- profile-recipes-controller ---------- */
 
 .profile-recipes-controller {
-    border-radius: 15px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.438);
     width: 100%;
-    margin-top: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
+    padding: 10px;
+    background-color: #dda85870;
+    margin-bottom: 20px;
 }
 
 .profile-recipes-info {
@@ -113,42 +155,49 @@ table.profile-main-table {
 .profile-recipe-box {
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(to right, rgba(209, 163, 37, 0.432), white);
+    background: linear-gradient(to right, #d1a3256e, #e4e2dc6e);
 }
 
 .profile-recipe-box label {
-    padding: 5px;
-    padding-top: 6px;
-    text-align: center;
+    padding: 6px 5px 5px 15px;
+    font-size: 17px;
 }
+
 .recipe-box-btn {
-    padding: 5px;
+    display: flex;
+    gap: 10px;
 }
 
 .recipe-box-btn button {
     border: 1px solid black;
     border-radius: 3px;
+    padding: 5px;
 }
 
 .recipe-box-view-btn {
-    background-color: rgb(123, 196, 28);
+    background-color: #a6e257;
 }
+
 .recipe-box-edit-btn {
-    background-color: rgb(251, 255, 0);
+    background-color: #dde012;
 }
+
 .recipe-box-delete-btn {
-    background-color: rgb(255, 102, 0);
+    background-color: #ff6600;
 }
 
 .add-recipe-btn {
-    margin-top: 20px;
-    /* height: 50%; */
-    width: 7%;
+    margin-top: 10px;
     padding: 4px;
     border-radius: 3px;
-    border: none;
-    font-size: 20px;
+    border: 1px solid darkgray;
+    font-size: 18px;
     font-weight: 500;
+    background-color: #fffbf6;
+}
+
+.add-recipe-btn:hover {
+    background-color: #ebdbc6;
 }
 
 .add-recipe-btn,

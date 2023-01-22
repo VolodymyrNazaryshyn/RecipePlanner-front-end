@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import Modal from '../modal/Modal'
-import convert from '../utilities/Convert'
+import { convert, parseCalories } from '../utilities/Convert'
 import '../css/styles.css'
 import { useNavigate } from 'react-router-dom'
+import * as BiIcons from 'react-icons/bi'
 
 const RecipeCard = ({ recipe }) => {
     const [modalActive, setModalActive] = useState(false)
 
     let navigate = useNavigate()
-
-    function getCalories() {
-        return JSON.parse(recipe.calories.replaceAll("'", '"')).calories
-    }
 
     return (
         <>
@@ -20,11 +17,11 @@ const RecipeCard = ({ recipe }) => {
                 <div className='card-body'>
                     <span className='category'>{recipe.kindOfMeal}</span>
                     <h3>{recipe.name}</h3>
-                    <h3>⏳ {recipe.cookingTime} min</h3>
+                    <h3><BiIcons.BiTimeFive /> {recipe.cookingTime} min</h3>
                     <h4>{recipe.ingredientCount} ingredients</h4>
                     <h4>{!!recipe.cuisineType && recipe.cuisineType + " cuisine"}</h4>
                     <h4>{!!recipe.diet && recipe.diet + " diet"}</h4>
-                    <h4>{getCalories()}</h4>
+                    <h4>{parseCalories(recipe).calories}</h4>
                 </div>
             </div>
             <Modal active={modalActive} setActive={setModalActive}>

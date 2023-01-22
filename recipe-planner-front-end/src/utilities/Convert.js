@@ -1,8 +1,10 @@
-function convert(obj) {
+export function convert(obj) {
     return Object.keys(obj).map(key => ({
         name: key,
         value: obj[key]
     }))
 }
 
-export default convert
+export function parseCalories(recipe) {
+    return JSON.parse(recipe.calories.replaceAll("'", '"'))
+}

@@ -3,6 +3,9 @@ import '../css/profile.css'
 import Constants from '../utilities/Constants'
 import { useNavigate } from 'react-router-dom'
 import { subtractYears, getParseDateString } from '../utilities/dateFunctions'
+import * as BiIcons from 'react-icons/bi'
+import * as FaIcons from 'react-icons/fa'
+import * as RiIcons from 'react-icons/ri'
 
 function Profile() {
   const [name, setName] = useState('')
@@ -59,11 +62,9 @@ function Profile() {
   function EditName() {
     if (!isNameEditable) {
       setIsNameEditable(true)
-      document.getElementById("editName").innerText = "Save"
     }
     else {
-      headers.append('current-user-id',
-        localStorage.getItem('userid').replaceAll('"', ''))
+      headers.append('current-user-id', localStorage.getItem('userid').replaceAll('"', ''))
 
       fetch(Constants.API_URL_PUT_USERNAME + name, {
         method: 'PUT',
@@ -71,13 +72,7 @@ function Profile() {
       })
         .then(response => response.json())
         .then((data) => {
-          if (data === "Ok") {
-            setIsNameEditable(false)
-            document.getElementById("editName").innerText = "Edit"
-          }
-          else {
-            alert("Error: " + data)
-          }
+          (data === "Ok") ? setIsNameEditable(false) : alert("Error: " + data)
         })
     }
   }
@@ -85,11 +80,9 @@ function Profile() {
   function EditEmail() {
     if (!isEmailEditable) {
       setIsEmailEditable(true)
-      document.getElementById("editEmail").innerText = "Save"
     }
     else {
-      headers.append('current-user-id',
-        localStorage.getItem('userid').replaceAll('"', ''))
+      headers.append('current-user-id', localStorage.getItem('userid').replaceAll('"', ''))
 
       fetch(Constants.API_URL_PUT_EMAIL + email, {
         method: 'PUT',
@@ -97,13 +90,7 @@ function Profile() {
       })
         .then(response => response.json())
         .then((data) => {
-          if (data === "Ok") {
-            setIsEmailEditable(false)
-            document.getElementById("editEmail").innerText = "Edit"
-          }
-          else {
-            alert("Error: " + data)
-          }
+          (data === "Ok") ? setIsEmailEditable(false) : alert("Error: " + data)
         })
     }
   }
@@ -111,11 +98,9 @@ function Profile() {
   function EditBirthdayDate() {
     if (!isBirthdayDateEditable) {
       setIsBirthdayDateEditable(true)
-      document.getElementById("editBirthdayDate").innerText = "Save"
     }
     else {
-      headers.append('current-user-id',
-        localStorage.getItem('userid').replaceAll('"', ''))
+      headers.append('current-user-id', localStorage.getItem('userid').replaceAll('"', ''))
 
       fetch(Constants.API_URL_PUT_BIRTHDAY + birthdayDate, {
         method: 'PUT',
@@ -123,13 +108,7 @@ function Profile() {
       })
         .then(response => response.json())
         .then((data) => {
-          if (data === "Ok") {
-            setIsBirthdayDateEditable(false)
-            document.getElementById("editBirthdayDate").innerText = "Edit"
-          }
-          else {
-            alert("Error: " + data)
-          }
+          (data === "Ok") ? setIsBirthdayDateEditable(false) : alert("Error: " + data)
         })
     }
   }
@@ -137,11 +116,9 @@ function Profile() {
   function EditRegion() {
     if (!isRegionEditable) {
       setIsRegionEditable(true)
-      document.getElementById("editRegion").innerText = "Save"
     }
     else {
-      headers.append('current-user-id',
-        localStorage.getItem('userid').replaceAll('"', ''))
+      headers.append('current-user-id', localStorage.getItem('userid').replaceAll('"', ''))
 
       fetch(Constants.API_URL_PUT_REGION + region, {
         method: 'PUT',
@@ -149,13 +126,7 @@ function Profile() {
       })
         .then(response => response.json())
         .then((data) => {
-          if (data === "Ok") {
-            setIsRegionEditable(false)
-            document.getElementById("editRegion").innerText = "Edit"
-          }
-          else {
-            alert("Error: " + data)
-          }
+          (data === "Ok") ? setIsRegionEditable(false) : alert("Error: " + data)
         })
     }
   }
@@ -236,44 +207,44 @@ function Profile() {
             <table className="profile-main-table">
               <tbody>
                 <tr>
-                  <td>Username</td>
+                  <td>Username:</td>
                   <td>
                     {isNameEditable
-                      ? <input type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
+                      ? <input className="name-input" type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
                       : <span>{name}</span>}
                   </td>
-                  <td><button onClick={EditName} id="editName">Edit</button></td>
+                  <td><button onClick={EditName}>{isNameEditable ? <BiIcons.BiSave /> : <BiIcons.BiEditAlt />}</button></td>
                 </tr>
                 <tr>
-                  <td>Email</td>
+                  <td>Email:</td>
                   <td>
                     {isEmailEditable
-                      ? <input type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
+                      ? <input className="email-input" type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
                       : <span>{email}</span>}
                   </td>
-                  <td><button onClick={EditEmail} id="editEmail">Edit</button></td>
+                  <td><button onClick={EditEmail}>{isEmailEditable ? <BiIcons.BiSave /> : <BiIcons.BiEditAlt />}</button></td>
                 </tr>
                 <tr>
-                  <td>Bitrhday date</td>
+                  <td>Bitrhday date:</td>
                   <td>
                     {isBirthdayDateEditable
-                      ? <input type="date" defaultValue={birthdayDate}
+                      ? <input className="date-input" type="date" defaultValue={birthdayDate}
                         onChange={(e) => setBirthdayDate(e.target.value)}
                         min={subtractYears(new Date(), 100)}
                         max={getParseDateString(new Date().toLocaleDateString())} />
                       : <span>{birthdayDate}</span>}
                   </td>
-                  <td><button onClick={EditBirthdayDate} id="editBirthdayDate">Edit</button></td>
+                  <td><button onClick={EditBirthdayDate}>{isBirthdayDateEditable ? <BiIcons.BiSave /> : <BiIcons.BiEditAlt />}</button></td>
                 </tr>
                 <tr>
-                  <td>Gender</td>
-                  <td>{gender}</td>
+                  <td>Gender:</td>
+                  <td><span>{gender}</span></td>
                 </tr>
                 <tr>
-                  <td>Region</td>
+                  <td>Region:</td>
                   <td>
                     {isRegionEditable
-                      ? <select name="region"
+                      ? <select className="region-select" name="region"
                         onChange={(e) => setRegion(e.target.value)}
                         value={region}>
                         <option disabled defaultValue>Choose region</option>
@@ -286,7 +257,7 @@ function Profile() {
                       </select>
                       : <span>{region}</span>}
                   </td>
-                  <td><button onClick={EditRegion} id="editRegion">Edit</button></td>
+                  <td><button onClick={EditRegion}>{isRegionEditable ? <BiIcons.BiSave /> : <BiIcons.BiEditAlt />}</button></td>
                 </tr>
               </tbody>
             </table>
@@ -316,7 +287,6 @@ function Profile() {
           <button className="change-pass-btn" onClick={ChangePassword}>Change password</button>
         </div>
       </div>
-
       <div className="profile-recipes-controller">
         <h1 className="form-title">My Recipes</h1>
         <div className="profile-recipes-info">
@@ -325,9 +295,9 @@ function Profile() {
             <div className="profile-recipe-box">
               <label>Banana Smoothie</label>
               <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn">view</button>
-                <button className="recipe-box-edit-btn">edit</button>
-                <button className="recipe-box-delete-btn">delete</button>
+                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
+                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
+                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
               </div>
             </div>
           </div>
@@ -335,9 +305,9 @@ function Profile() {
             <div className="profile-recipe-box">
               <label>Spaghetti</label>
               <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn">view</button>
-                <button className="recipe-box-edit-btn">edit</button>
-                <button className="recipe-box-delete-btn">delete</button>
+                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
+                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
+                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
               </div>
             </div>
           </div>
@@ -345,14 +315,14 @@ function Profile() {
             <div className="profile-recipe-box">
               <label>Split Pea Soup</label>
               <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn">view</button>
-                <button className="recipe-box-edit-btn">edit</button>
-                <button className="recipe-box-delete-btn">delete</button>
+                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
+                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
+                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
               </div>
             </div>
           </div>
         </div>
-        <button className="add-recipe-btn">Add</button>
+        <button className="add-recipe-btn">Add recipe</button>
       </div>
     </>
   )
