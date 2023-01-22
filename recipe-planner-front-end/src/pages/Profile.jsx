@@ -6,6 +6,7 @@ import { subtractYears, getParseDateString } from '../utilities/dateFunctions'
 import * as BiIcons from 'react-icons/bi'
 import * as FaIcons from 'react-icons/fa'
 import * as RiIcons from 'react-icons/ri'
+import * as MdIcons from 'react-icons/md'
 
 function Profile() {
   const [name, setName] = useState('')
@@ -322,7 +323,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <button className="add-recipe-btn">Add recipe</button>
+        <button className="add-recipe-btn" onClick={() => navigate("/add-recipe")}>Add recipe <MdIcons.MdOutlinePostAdd /></button>
       </div>
     </>
   )
