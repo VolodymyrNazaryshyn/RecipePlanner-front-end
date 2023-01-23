@@ -8,6 +8,7 @@ import AllRecipies from "./pages/AllRecipies"
 import RecipiesByNameOrIngredient from "./pages/RecipiesByNameOrIngredient"
 import Profile from './pages/Profile'
 import AddRecipe from './pages/AddRecipe'
+import EditRecipe from './pages/EditRecipe'
 import Logout from './pages/Logout'
 import NotFound from "./pages/NotFound"
 import Registration from "./pages/Registration"
@@ -29,6 +30,7 @@ function App() {
           <Route path="/recipe-info/:id" element={<RecipeInfo />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/add-recipe" element={<AddRecipe />} />
+          <Route path="/edit-recipe/:id" element={<EditRecipe />} />
           <Route path="/user-recipes/:id" element={<UserRecipies />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />

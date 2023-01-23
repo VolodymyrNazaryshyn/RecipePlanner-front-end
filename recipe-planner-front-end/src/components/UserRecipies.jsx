@@ -33,16 +33,18 @@ function UserRecipies() {
 
                     <div className='recipe-full-info-box'>
                         <h3 className="recipe-kindOfMeal">{!!recipe.kindOfMeal && "Kind of meal: " + recipe.kindOfMeal}</h3>
-                        {!!recipe.cuisineType && <div className='recipe-cuisine'>
-                            <h3>{recipe.cuisineType + " cuisine"}</h3>
-                        </div>}
+                        {!!recipe.cuisineType &&
+                            <div className='recipe-cuisine' style={{paddingLeft: "10px"}}>
+                                <h3>{recipe.cuisineType + " cuisine"}</h3>
+                            </div>
+                        }
                         {!!recipe.diet && <h3 className='recipe-diet'>{recipe.diet + " diet"}</h3>}
                     </div>
 
                     <div className="recipe-ingredients">
                         <div className="ingred-cooking-time-box">
                             <h2 className="ingred-count">Ingredients: {recipe.ingredientCount}</h2>
-                            {!!recipe.cookingTime && <span>cooking time: {recipe.cookingTime} min</span>}
+                            {!!recipe.cookingTime && <span>Cooking time: {recipe.cookingTime} min</span>}
                         </div>
                         <div className="ingredients-container">
                             <ul>
@@ -56,7 +58,7 @@ function UserRecipies() {
                     </div>
 
                     <h2 className="content-title">Content:</h2>
-                    <div className="calories-container">Calories: {recipe.calories}</div>
+                    <div className="calories-container"><strong style={{fontSize: "18px"}}>Calories: {recipe.calories}</strong></div>
 
                     <div className="recipe-description">
                         <h2>Description</h2>

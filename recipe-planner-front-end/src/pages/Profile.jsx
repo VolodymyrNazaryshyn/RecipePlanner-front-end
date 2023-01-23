@@ -322,7 +322,7 @@ function Profile() {
         <h1 className="form-title">My Recipes</h1>
         <div className="profile-recipes-info">
           {
-            (!userRecipes.length) ? "No recipies!" : (<>
+            (!userRecipes.length) ? <h3 className="no-recipies-title">No recipies!</h3> : (<>
               {
                 userRecipes.map(recipe => (
                   <div className="profile-recipe-background" key={recipe.id}>
@@ -330,7 +330,7 @@ function Profile() {
                       <label>{recipe.name}</label>
                       <div className="recipe-box-btn">
                         <button className="recipe-box-view-btn" onClick={() => navigate(`/user-recipes/${recipe.id}`)}><FaIcons.FaEye /></button>
-                        <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
+                        <button className="recipe-box-edit-btn" onClick={() => navigate(`/edit-recipe/${recipe.id}`)}><BiIcons.BiEditAlt /></button>
                         <button className="recipe-box-delete-btn" onClick={() => DeleteRecipe(recipe.id)}><RiIcons.RiDeleteBin6Line /></button>
                       </div>
                     </div>

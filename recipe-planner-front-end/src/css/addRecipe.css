@@ -1,3 +1,8 @@
+.add-recipe-table {
+    display: flex;
+    justify-content: center;
+}
+
 .add-recipe-input-box {
     display: flex;
     flex-direction: column;
@@ -13,7 +18,12 @@
 
 .add-recipe-input-box input.name,
 .add-recipe-input-box input.image,
-.add-recipe-input-box textarea.description {
+.add-recipe-input-box textarea.description,
+.add-recipe-input-box input.calories,
+.add-recipe-input-box input.cooking-time,
+.add-recipe-input-box input.cuisine-type,
+.add-recipe-input-box select.kind-of-meal,
+.add-recipe-input-box input.diet {
     padding: 5px;
     border-radius: 10px;
     background-color: #ffffff70;
@@ -24,4 +34,8 @@
     height: 150px;
     resize: none;
     padding: 15px;
+}
+
+.add-recipe-table .add-recipe-btn {
+    margin-bottom: 20px;
 }

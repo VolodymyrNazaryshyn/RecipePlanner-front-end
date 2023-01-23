@@ -25,7 +25,7 @@ function AddRecipe() {
     }
   }, [])
 
-  function AddRecipe() {
+  function AddRecipeContent() {
     headers.append('current-user-id', localStorage.getItem('userid').replaceAll('"', ''))
 
     let ingredientsString = ''
@@ -64,58 +64,69 @@ function AddRecipe() {
   }
 
   return (
-    <div className="profile-recipes-controller">
+    <>
       <h1 className="form-title">Add Recipe</h1>
-      <div className="profile-recipes-info">
-        <table>
-          <tbody>
-            <tr>
-              <td colSpan={2}>
-                <div className='add-recipe-input-box'>
-                  <input className='name' type="text" placeholder='Input name of recipe'
-                    required onChange={(e) => setName(e.target.value)} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2}>
-                <div className='ingredients-list'>
-                  <IngredientsList ingredients={ingredients} setIngredients={setIngredients} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2}>
-                <div className='add-recipe-input-box'>
-                  <textarea className='description' placeholder='Input description'
-                    required onChange={(e) => setDescription(e.target.value)} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2}>
-                <div className='add-recipe-input-box'>
-                  <input className='image' type="text" placeholder='Paste URL of recipe image (optional)'
-                    onChange={(e) => setImage(e.target.value)} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Calories</td>
-              <td><input type="text" onChange={(e) => setCalories(e.target.value)} /></td>
-            </tr>
-            <tr>
-              <td>CookingTime</td>
-              <td><input type="text" onChange={(e) => setCookingTime(e.target.value)} /></td>
-            </tr>
-            <tr>
-              <td>CuisineType</td>
-              <td><input type="text" onChange={(e) => setCuisineType(e.target.value)} /></td>
-            </tr>
-            <tr>
-              <td>KindOfMeal</td>
-              <td>
-                <select onChange={(e) => setKindOfMeal(e.target.value)}>
+      <table className='add-recipe-table'>
+        <tbody>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <input className='name' type="text" placeholder='Input name of recipe'
+                  required onChange={(e) => setName(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='ingredients-list'>
+                <IngredientsList ingredients={ingredients} setIngredients={setIngredients} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <textarea className='description' placeholder='Input description'
+                  required onChange={(e) => setDescription(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <input className='image' type="text" placeholder='Paste URL of recipe image (optional)'
+                  onChange={(e) => setImage(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <input className='calories' type="text" placeholder='Input calories (optional)'
+                  onChange={(e) => setCalories(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <input className='cooking-time' type="text" placeholder='Input cooking time (optional)'
+                  onChange={(e) => setCookingTime(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className="add-recipe-input-box">
+                <input className='cuisine-type' type="text" placeholder='Input cuisine type (optional)'
+                  onChange={(e) => setCuisineType(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className='add-recipe-input-box'>
+                <select className='kind-of-meal' onChange={(e) => setKindOfMeal(e.target.value)}>
                   <option defaultValue value="Breakfast">Breakfast</option>
                   <option value="Dessert">Dessert</option>
                   <option value="Soup">Soup</option>
@@ -123,17 +134,27 @@ function AddRecipe() {
                   <option value="Main Dishes">Main Dishes</option>
                   <option value="Dinner">Dinner</option>
                 </select>
-              </td>
-            </tr>
-            <tr>
-              <td>Diet</td>
-              <td><input type="text" onChange={(e) => setDiet(e.target.value)} /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <button className="add-recipe-btn" onClick={AddRecipe}>Add recipe</button>
-    </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className="add-recipe-input-box">
+                <input className='diet' type="text" placeholder='Input diet (optional)'
+                  onChange={(e) => setDiet(e.target.value)} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div>
+                <button className="add-recipe-btn" onClick={AddRecipeContent}>Add recipe</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   )
 }
 
