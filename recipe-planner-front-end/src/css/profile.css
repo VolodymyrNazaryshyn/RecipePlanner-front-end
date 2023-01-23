@@ -207,3 +207,7 @@ table.profile-main-table button:hover {
 .profile-recipe-box button {
     cursor: pointer;
 }
+
+.no-recipies-title {
+    text-align: center;
+}

@@ -29,8 +29,22 @@ function Profile() {
   const [newPassErrMsg, setNewPassErrMsg] = useState('')
   const [confirmPassErrMsg, setConfirmPassErrMsg] = useState('')
 
+  const [userRecipes, setUserRecipes] = useState([])
+
   let headers = new Headers()
   let navigate = useNavigate()
+
+  function GetUserRecipies() {
+    fetch(Constants.API_URL_GET_USER_RECIPIES, {
+      method: 'GET',
+      headers: headers
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        setUserRecipes(data)
+      })
+  }
 
   useEffect(() => {
     if (localStorage.getItem('userid') === null) {
@@ -57,6 +71,8 @@ function Profile() {
             setRegion(data.region)
           }
         })
+
+      GetUserRecipies()
     }
   }, [])
 
@@ -199,6 +215,20 @@ function Profile() {
     }
   }
 
+  function DeleteRecipe(id) {
+    headers.append('current-user-id',
+      localStorage.getItem('userid').replaceAll('"', ''))
+
+    fetch(Constants.API_URL_DELETE_USER_RECIPE_BY_ID + id, {
+      method: "DELETE",
+      headers: headers
+    })
+      .then(res => res.json())
+      .then(data => {
+        (data === "Ok") ? GetUserRecipies() : console.log(data)
+      })
+  }
+
   return (
     <>
       <div className="profile-controller">
@@ -291,37 +321,24 @@ function Profile() {
       <div className="profile-recipes-controller">
         <h1 className="form-title">My Recipes</h1>
         <div className="profile-recipes-info">
-
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Banana Smoothie</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Spaghetti</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
-          <div className="profile-recipe-background">
-            <div className="profile-recipe-box">
-              <label>Split Pea Soup</label>
-              <div className="recipe-box-btn">
-                <button className="recipe-box-view-btn"><FaIcons.FaEye /></button>
-                <button className="recipe-box-edit-btn"><BiIcons.BiEditAlt /></button>
-                <button className="recipe-box-delete-btn"><RiIcons.RiDeleteBin6Line /></button>
-              </div>
-            </div>
-          </div>
+          {
+            (!userRecipes.length) ? <h3 className="no-recipies-title">No recipies!</h3> : (<>
+              {
+                userRecipes.map(recipe => (
+                  <div className="profile-recipe-background" key={recipe.id}>
+                    <div className="profile-recipe-box">
+                      <label>{recipe.name}</label>
+                      <div className="recipe-box-btn">
+                        <button className="recipe-box-view-btn" onClick={() => navigate(`/user-recipes/${recipe.id}`)}><FaIcons.FaEye /></button>
+                        <button className="recipe-box-edit-btn" onClick={() => navigate(`/edit-recipe/${recipe.id}`)}><BiIcons.BiEditAlt /></button>
+                        <button className="recipe-box-delete-btn" onClick={() => DeleteRecipe(recipe.id)}><RiIcons.RiDeleteBin6Line /></button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </>)
+          }
         </div>
         <button className="add-recipe-btn" onClick={() => navigate("/add-recipe")}>Add recipe <MdIcons.MdOutlinePostAdd /></button>
       </div>

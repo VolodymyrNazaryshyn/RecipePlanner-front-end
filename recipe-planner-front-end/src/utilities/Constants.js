@@ -12,7 +12,11 @@ const ENDPOINTS = {
     PUT_EMAIL: 'AuthController/ChangeEmail?newEmail=',
     PUT_BIRTHDAY: 'AuthController/ChangeBirthdayDate?newBirthday=',
     PUT_REGION: 'AuthController/ChangeRegion?newRegion=',
-    PUT_PASSWORD: 'AuthController/ChangePassword?'
+    PUT_PASSWORD: 'AuthController/ChangePassword?',
+    POST_ADD_RECIPE: 'UserRecipeController/AddNewRecipe',
+    GET_USER_RECIPIES: 'UserRecipeController/GetUsersRecipies',
+    GET_USER_RECIPE_BY_ID: 'UserRecipeController/GetUsersRecipyById?id=',
+    DELETE_USER_RECIPE_BY_ID: 'UserRecipeController/DeleteCurrentRecipe?recipeId='
 }
 
 const Constants = {
@@ -27,7 +31,11 @@ const Constants = {
     API_URL_PUT_EMAIL: `${API_BASE_URL}/${ENDPOINTS.PUT_EMAIL}`,
     API_URL_PUT_BIRTHDAY: `${API_BASE_URL}/${ENDPOINTS.PUT_BIRTHDAY}`,
     API_URL_PUT_REGION: `${API_BASE_URL}/${ENDPOINTS.PUT_REGION}`,
-    API_URL_PUT_PASSWORD: `${API_BASE_URL}/${ENDPOINTS.PUT_PASSWORD}`
+    API_URL_PUT_PASSWORD: `${API_BASE_URL}/${ENDPOINTS.PUT_PASSWORD}`,
+    API_URL_POST_ADD_RECIPE: `${API_BASE_URL}/${ENDPOINTS.POST_ADD_RECIPE}`,
+    API_URL_GET_USER_RECIPIES: `${API_BASE_URL}/${ENDPOINTS.GET_USER_RECIPIES}`,
+    API_URL_GET_USER_RECIPE_BY_ID: `${API_BASE_URL}/${ENDPOINTS.GET_USER_RECIPE_BY_ID}`,
+    API_URL_DELETE_USER_RECIPE_BY_ID: `${API_BASE_URL}/${ENDPOINTS.DELETE_USER_RECIPE_BY_ID}`
 }
 
 export default Constants

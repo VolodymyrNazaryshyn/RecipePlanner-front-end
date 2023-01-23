@@ -33,7 +33,7 @@ const RecipeCard = ({ recipe }) => {
                             <h4>{recipe.kindOfMeal}</h4>
                         </div>
                         <div className='recipe-info-box'>
-                            <h3>Ingredients</h3>
+                            <h3>Ingredients: {recipe.ingredientCount}</h3>
                             <div className='cuisine-info'>
                                 {!!recipe.cuisineType && <img src={`/img/flags/${recipe.cuisineType}.png`} alt="" />}
                                 <span>{!!recipe.cuisineType && recipe.cuisineType + " cuisine"}</span>
