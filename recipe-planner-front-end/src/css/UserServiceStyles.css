@@ -176,6 +176,19 @@
     outline: none;
 }
 
+.login-btn {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.login-btn a {
+    color: white;
+}
+
+.login-btn a:hover {
+    color: rgb(255, 196, 0);
+}
+
 /* ------------- Login Page ------------- */
 
 .login-container {
